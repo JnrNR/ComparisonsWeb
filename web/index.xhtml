@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/primeStyle.css"  />
+    </h:head>
+    <h:body>
+        Hello from Facelets
+        <br />
+        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+        
+        <!--Progrmando controles PrimeFaces-->
+
+        <p:ajaxStatus onstart="statusDialog.show()" onsuccess="statusDialog.hide()"/>  
+              
+        <p:dialog modal="true" widgetVar="statusDialog" header="Procesando..."   
+                  draggable="false" closable="false" resizable="false">  
+            <p:graphicImage value="resources/images/preloader6.gif" />    
+        </p:dialog>  
+        
+        <h:form>
+            
+
+            
+            
+            <p:panel header="Opciones de Comparación" toggleable="true" toggleSpeed="500">
+                
+                <p:accordionPanel>
+                    <p:tab title="Comparación entre dos archivos WSDL">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage value="resources/images/wsdlIcon.png" height="64" width="64" />
+                            <h:outputText
+                                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
+                                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. T
+                                hrough Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, 
+                                but given to ruthless violence whenever anything stands against the good of the family." />
+                                      
+                                <h:outputText value="URI WSDL1:" />
+                                <p:inputText id="uri1OP1" value="0" size="100"/>
+                                <h:outputText value="URI WSDL2:" />
+                                <p:inputText id="uri2OP1" value="0" size="100"/>
+                                <p:commandButton id="compararOP1" value="Comparar" actionListener="#{mB_TablaControl.instertarRegistro}" update=":#{p:component('tabla')}"/>
+
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Comparación entre los archivos WSDL de un repositorio">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage value="resources/images/repository.png" height="64" width="64" />
+                            <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. 
+                            In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, 
+                            killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
+                        
+                            <f:facet name="footer">  
+                                <h:outputText value="URL del repositorio:" />
+                                <p:inputText id="uriOP2" value="0" size="100"/>
+                                <p:commandButton id="compararOP2" value="Comparar" actionListener="#{mB_TablaControl.instertarRegistro}" update=":#{p:component('tabla')}"/>
+                            </f:facet>
+                        
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Comparación entre dos operaciones almacenadas en formato RDF">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            
+                            <p:graphicImage value="resources/images/rdfLogo.gif" height="64" width="59" />
+                            <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. 
+                            In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, 
+                            killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
+
+                            <h:outputText value="URI RDF1:" />
+                            <p:inputText id="uri1OP2" value="0" size="100"/>
+                            <h:outputText value="URI RDF2:" />
+                            <p:inputText id="uri2OP2" value="0" size="100"/>
+                            <p:commandButton id="compararOP3" value="Comparar" actionListener="#{mB_TablaControl.instertarRegistro}" update=":#{p:component('tabla')}"/>
+    
+                        </h:panelGrid>
+                    </p:tab>
+                </p:accordionPanel>
+                
+            </p:panel>
+            
+            <br/><br/>
+            
+            <!-- DataTable -->
+            
+            <p:dataTable id="tabla" var="reg"  paginator="true" rows="10"
+                         selectionMode="single"  selection="#{mB_TablaControl.registroSeleccionado}" 
+                         rowKey="#{reg.servicioA}" rowIndexVar="rowIndex" value="#{mB_TablaControl.registros}"
+                         >
+ 
+                <f:facet name="header">
+                    Presiona el botón "Grafo" para visualizar los grafos de la comparación seleccionada: 
+                    <p:commandButton id="viewButton" value="Grafo" icon="ui-icon-search"/>
+                </f:facet>
+                
+                <p:column headerText="Comparación">
+                    #{rowIndex+1}
+                </p:column>
+                
+                <p:column headerText="SW A">
+                    #{reg.servicioA}
+                </p:column>
+
+                <p:column headerText="Operación A">
+                    #{reg.operacionA}
+                </p:column>
+
+                <p:column headerText="SW B">
+                    #{reg.servicioB}
+                </p:column>
+
+                <p:column headerText="Operación B">
+                    #{reg.operacionB}
+                </p:column>
+
+                <p:column headerText="Similitud">
+                    #{reg.similitud}
+                </p:column>
+
+            </p:dataTable>
+
+            
+            
+            <!-- datatable -->
+            
+        </h:form>
+        
+        
+    </h:body>
+</html>
