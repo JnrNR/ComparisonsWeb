@@ -1,0 +1,34 @@
+digraph G
+{
+N0R0n0 [label="OPERACION"];
+N1R0n0 [label="ENTRADA"];
+N2R0n0 [label="SIMPLE"];
+N3R0n0 [label="SIMPLE"];
+N4R0n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N2R0n1 [label="SIMPLE"];
+N3R1n0 [label="SIMPLE"];
+N4R1n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N1R0n1 [label="SALIDA"];
+N2R1n0 [label="SIMPLE"];
+N3R2n0 [label="SIMPLE"];
+N4R2n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N2R1n1 [label="SIMPLE"];
+N3R3n0 [label="SIMPLE"];
+N4R3n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+
+N0R0n0 -> N1R0n0;
+N1R0n0 -> N2R0n0;
+N2R0n0 -> N3R0n0;
+N3R0n0 -> N4R0n0;
+N1R0n0 -> N2R0n1;
+N2R0n1 -> N3R1n0;
+N3R1n0 -> N4R1n0;
+N0R0n0 -> N1R0n1;
+N1R0n1 -> N2R1n0;
+N2R1n0 -> N3R2n0;
+N3R2n0 -> N4R2n0;
+N1R0n1 -> N2R1n1;
+N2R1n1 -> N3R3n0;
+N3R3n0 -> N4R3n0;
+
+}

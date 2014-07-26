@@ -1,0 +1,66 @@
+digraph G
+{
+N0R0n0 [label="OPERACION"];
+N1R0n0 [label="ENTRADA"];
+N2R0n0 [label="COMPLEJO"];
+N3R0n0 [label="SIMPLE"];
+N4R0n0 [label="SIMPLE"];
+N5R0n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N3R0n1 [label="SIMPLE"];
+N4R1n0 [label="SIMPLE"];
+N5R1n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N3R0n2 [label="SIMPLE"];
+N4R2n0 [label="SIMPLE"];
+N5R2n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N1R0n1 [label="SALIDA"];
+N2R1n0 [label="COMPLEJO"];
+N3R3n0 [label="SIMPLE"];
+N4R5n0 [label="SIMPLE"];
+N5R4n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N3R3n1 [label="SIMPLE"];
+N4R6n0 [label="SIMPLE"];
+N5R5n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N3R3n2 [label="SIMPLE"];
+N4R7n0 [label="SIMPLE"];
+N5R6n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N2R1n1 [label="COMPLEJO"];
+N3R1n0 [label="SIMPLE"];
+N4R3n0 [label="SIMPLE"];
+N5R3n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N3R1n1 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:float</FONT>>];
+N2R1n2 [label="SIMPLE"];
+N3R2n0 [label="SIMPLE"];
+N4R4n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+
+N0R0n0 -> N1R0n0;
+N1R0n0 -> N2R0n0;
+N2R0n0 -> N3R0n0;
+N3R0n0 -> N4R0n0;
+N4R0n0 -> N5R0n0;
+N2R0n0 -> N3R0n1;
+N3R0n1 -> N4R1n0;
+N4R1n0 -> N5R1n0;
+N2R0n0 -> N3R0n2;
+N3R0n2 -> N4R2n0;
+N4R2n0 -> N5R2n0;
+N0R0n0 -> N1R0n1;
+N1R0n1 -> N2R1n0;
+N2R1n0 -> N3R3n0;
+N3R3n0 -> N4R5n0;
+N4R5n0 -> N5R4n0;
+N2R1n0 -> N3R3n1;
+N3R3n1 -> N4R6n0;
+N4R6n0 -> N5R5n0;
+N2R1n0 -> N3R3n2;
+N3R3n2 -> N4R7n0;
+N4R7n0 -> N5R6n0;
+N1R0n1 -> N2R1n1;
+N2R1n1 -> N3R1n0;
+N3R1n0 -> N4R3n0;
+N4R3n0 -> N5R3n0;
+N2R1n1 -> N3R1n1;
+N1R0n1 -> N2R1n2;
+N2R1n2 -> N3R2n0;
+N3R2n0 -> N4R4n0;
+
+}

@@ -40,9 +40,9 @@
                                 but given to ruthless violence whenever anything stands against the good of the family." />
                                       
                                 <h:outputText value="URI WSDL1:" />
-                                <p:inputText id="uri1OP1" value="0" size="100"/>
+                                <p:inputText id="uri1OP1" value="#{mB_TablaControl.textoUno}" size="100"/>
                                 <h:outputText value="URI WSDL2:" />
-                                <p:inputText id="uri2OP1" value="0" size="100"/>
+                                <p:inputText id="uri2OP1" value="#{mB_TablaControl.textoDos}" size="100"/>
                                 <p:commandButton id="compararOP1" value="Comparar" actionListener="#{mB_TablaControl.instertarRegistro}" update=":#{p:component('tabla')}"/>
 
                         </h:panelGrid>

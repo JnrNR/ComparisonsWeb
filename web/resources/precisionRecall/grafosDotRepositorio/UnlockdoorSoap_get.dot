@@ -1,0 +1,16 @@
+digraph G
+{
+N0R0n0 [label="OPERACION"];
+N1R0n0 [label="ENTRADA"];
+N2R0n0 [label="SIMPLE"];
+N3R0n0 [label="SIMPLE"];
+N4R0n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N1R0n1 [label=<SALIDA>];
+
+N0R0n0 -> N1R0n0;
+N1R0n0 -> N2R0n0;
+N2R0n0 -> N3R0n0;
+N3R0n0 -> N4R0n0;
+N0R0n0 -> N1R0n1;
+
+}

@@ -1,0 +1,68 @@
+digraph G
+{
+N0R0n0 [label="OPERACION"];
+N1R0n0 [label=<ENTRADA>];
+N1R0n1 [label="SALIDA"];
+N2R0n0 [label="COMPLEJO"];
+N3R0n0 [label="COMPLEJO"];
+N4R2n0 [label="COMPLEJO"];
+N5R1n0 [label="COMPLEJO"];
+N6R0n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N6R0n1 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:float</FONT>>];
+N6R0n2 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:float</FONT>>];
+N6R0n3 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N4R2n1 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N4R2n2 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N4R2n3 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N4R2n4 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N3R0n1 [label="COMPLEJO"];
+N4R1n0 [label="COMPLEJO"];
+N5R0n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N5R0n1 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:float</FONT>>];
+N5R0n2 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:float</FONT>>];
+N5R0n3 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N3R0n2 [label="COMPLEJO"];
+N4R0n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:float</FONT>>];
+N4R0n1 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:float</FONT>>];
+N4R0n2 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:float</FONT>>];
+N4R0n3 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N3R0n3 [label=<DESC>];
+N2R0n1 [label="COMPLEJO"];
+N3R1n0 [label="SIMPLE"];
+N4R3n0 [label="SIMPLE"];
+N5R2n0 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:string</FONT>>];
+N3R1n1 [label=<PRIMITV<BR/> <FONT POINT-SIZE="10">xsd:float</FONT>>];
+
+N0R0n0 -> N1R0n0;
+N0R0n0 -> N1R0n1;
+N1R0n1 -> N2R0n0;
+N2R0n0 -> N3R0n0;
+N3R0n0 -> N4R2n0;
+N4R2n0 -> N5R1n0;
+N5R1n0 -> N6R0n0;
+N5R1n0 -> N6R0n1;
+N5R1n0 -> N6R0n2;
+N5R1n0 -> N6R0n3;
+N3R0n0 -> N4R2n1;
+N3R0n0 -> N4R2n2;
+N3R0n0 -> N4R2n3;
+N3R0n0 -> N4R2n4;
+N2R0n0 -> N3R0n1;
+N3R0n1 -> N4R1n0;
+N4R1n0 -> N5R0n0;
+N4R1n0 -> N5R0n1;
+N4R1n0 -> N5R0n2;
+N4R1n0 -> N5R0n3;
+N2R0n0 -> N3R0n2;
+N3R0n2 -> N4R0n0;
+N3R0n2 -> N4R0n1;
+N3R0n2 -> N4R0n2;
+N3R0n2 -> N4R0n3;
+N2R0n0 -> N3R0n3;
+N1R0n1 -> N2R0n1;
+N2R0n1 -> N3R1n0;
+N3R1n0 -> N4R3n0;
+N4R3n0 -> N5R2n0;
+N2R0n1 -> N3R1n1;
+
+}

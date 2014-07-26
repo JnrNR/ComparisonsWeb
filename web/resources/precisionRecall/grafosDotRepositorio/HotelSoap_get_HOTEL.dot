@@ -1,0 +1,12 @@
+digraph G
+{
+N0R0n0 [label="OPERACION"];
+N1R0n0 [label=<ENTRADA>];
+N1R0n1 [label="SALIDA"];
+N2R0n0 [label=<DESC>];
+
+N0R0n0 -> N1R0n0;
+N0R0n0 -> N1R0n1;
+N1R0n1 -> N2R0n0;
+
+}
