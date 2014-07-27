@@ -74,7 +74,7 @@
                             <p:inputText id="uri1OP2" value="0" size="100"/>
                             <h:outputText value="URI RDF2:" />
                             <p:inputText id="uri2OP2" value="0" size="100"/>
-                            <p:commandButton id="compararOP3" value="Comparar" actionListener="#{mB_TablaControl.instertarRegistro}" update=":#{p:component('tabla')}"/>
+                            <p:commandButton id="compararOP3" value="Comparar" actionListener="#{mB_TablaControl.insertarregristro2}" update=":#{p:component('tabla')}"/>
     
                         </h:panelGrid>
                     </p:tab>
@@ -95,36 +95,79 @@
                     Presiona el botón "Grafo" para visualizar los grafos de la comparación seleccionada: 
                     <p:commandButton id="viewButton" value="Grafo" icon="ui-icon-search"/>
                 </f:facet>
-                
-                <p:column headerText="Comparación">
-                    #{rowIndex+1}
+             
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Comparación" />
+                    </f:facet>
+                    <h:outputText value="#{rowIndex+1}" />
                 </p:column>
                 
-                <p:column headerText="SW A">
-                    #{reg.servicioA}
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="SW A" />
+                    </f:facet>
+                    <h:outputText value="#{reg.servicioA}" />
                 </p:column>
 
-                <p:column headerText="Operación A">
-                    #{reg.operacionA}
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Operación A" />
+                    </f:facet>
+                    <h:outputText value="#{reg.operacionA}" />
                 </p:column>
 
-                <p:column headerText="SW B">
-                    #{reg.servicioB}
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="SW B" />
+                    </f:facet>
+                    <h:outputText value="#{reg.servicioB}" />
                 </p:column>
 
-                <p:column headerText="Operación B">
-                    #{reg.operacionB}
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Operación B" />
+                    </f:facet>
+                    <h:outputText value="#{reg.operacionB}" />
                 </p:column>
 
-                <p:column headerText="Similitud">
-                    #{reg.similitud}
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Similitud" />
+                    </f:facet>
+                    <h:outputText value="#{reg.similitud}" />
                 </p:column>
 
             </p:dataTable>
 
             
             
-            <!-- datatable -->
+            <!-- datatable -->   
+            
+            <!-- toolbar -->
+                <p:toolbar>
+                    <p:toolbarGroup align="right">
+                        
+                        <p:menuButton value="Save as">
+                            
+                            <p:menuitem value="PDF" ajax="false" immediate="true">
+                                <p:dataExporter type="pdf" target="tabla" fileName="comparissons" />
+                            </p:menuitem>
+                            <p:menuitem value="XLS" ajax="false" immediate="true">
+                                <p:dataExporter type="xls" target="tabla" fileName="comparissons" />
+                            </p:menuitem>
+                            <p:menuitem value="CSV" ajax="false" immediate="true">
+                                <p:dataExporter type="csv" target="tabla" fileName="comparissons" />
+                            </p:menuitem>
+                            <p:menuitem value="XML" ajax="false" immediate="true">
+                                <p:dataExporter type="xml" target="tabla" fileName="comparissons" />
+                            </p:menuitem>
+                        </p:menuButton>
+                    </p:toolbarGroup>
+
+                </p:toolbar>
+            
+            <!-- toolbar -->         
             
         </h:form>
         

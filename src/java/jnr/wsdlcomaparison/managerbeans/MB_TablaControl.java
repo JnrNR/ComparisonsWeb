@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import jnr.operationsmatcher.MatcherResult;
 import jnr.operationsmatcher.TreeMatcher;
+import jnr.utilities.Directorio;
 
 /**
  *
@@ -96,5 +97,11 @@ public class MB_TablaControl {
         
         //jnr.utilities.Directorio.listarElementosDeURL("http://148.247.102.37:8080/wsdlcomparison/servicios/pruebas2/");
     } 
+    
+    public void insertarregristro2(){
+        System.out.println("LEYENDO DIRECTORIO");
+        Directorio.listarElementosDirectorio(".");
+        registros.add(new Registro(" ", " ", " ", " ", " "));
+    }
     
 }
