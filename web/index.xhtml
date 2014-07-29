@@ -24,8 +24,6 @@
         
         <h:form>
             
-
-            
             
             <p:panel header="Opciones de Comparación" toggleable="true" toggleSpeed="500">
                 
@@ -39,11 +37,48 @@
                                 hrough Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, 
                                 but given to ruthless violence whenever anything stands against the good of the family." />
                                       
-                                <h:outputText value="URI WSDL1:" />
-                                <p:inputText id="uri1OP1" value="#{mB_TablaControl.textoUno}" size="100"/>
-                                <h:outputText value="URI WSDL2:" />
-                                <p:inputText id="uri2OP1" value="#{mB_TablaControl.textoDos}" size="100"/>
-                                <p:commandButton id="compararOP1" value="Comparar" actionListener="#{mB_TablaControl.instertarRegistro}" update=":#{p:component('tabla')}"/>
+                                <h:outputText value="URI WSDL A:" />
+                                <p:inputText id="uri1OP1" value="#{mB_TablaControl.op1_wsdl1}" size="100"/>
+                                <h:outputText value="URI WSDL B:" />
+                                <p:inputText id="uri2OP1" value="#{mB_TablaControl.op1_wsdl2}" size="100"/>
+                                
+                                <h:outputText value=" " />
+                                <h:panelGroup>
+                                    <h:outputText value="Usar repositorio y patron de prueba: " />
+                                    <p:selectBooleanCheckbox value="#{mB_TablaControl.pruebaDosServicos}" >
+                                        <p:ajax global="false" update="uri1OP1,uri2OP1" listener="#{mB_TablaControl.setPruebaDosServicios}" />
+                                    </p:selectBooleanCheckbox>
+                                </h:panelGroup>
+                                
+                                
+                                <p:commandButton id="compararOP1" value="Comparar" actionListener="#{mB_TablaControl.compararWSDLUnoAUno}" update=":#{p:component('tabla')}"/>
+
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Comparación entre un archivo WSDL y los archivos WSDL de un repositorio">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage value="resources/images/wsdlIcon.png" height="64" width="64" />
+                            <h:outputText
+                                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
+                                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. T
+                                hrough Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, 
+                                but given to ruthless violence whenever anything stands against the good of the family." />
+                                      
+                                <h:outputText value="URI WSDL:" />
+                                <p:inputText id="uri1OP2" value="#{mB_TablaControl.op2_patron}" size="100"/>
+                                <h:outputText value="URL del repositorio:" />
+                                <p:inputText id="uri2OP2" value="#{mB_TablaControl.op2_repositorio}" size="100"/>
+                                
+                                <h:outputText value=" " />
+                                <h:panelGroup>
+                                    <h:outputText value="Usar repositorio y patron de prueba: " />
+                                    <p:selectBooleanCheckbox value="#{mB_TablaControl.pruebaServiciosServico}" >
+                                        <p:ajax global="false" update="uri1OP2,uri2OP2" listener="#{mB_TablaControl.setPruebaServiciosServicio}" />
+                                    </p:selectBooleanCheckbox>
+                                </h:panelGroup>
+                                
+                                
+                                <p:commandButton id="compararOP2" value="Comparar" actionListener="#{mB_TablaControl.compararWSDLyRepositorio}" update=":#{p:component('tabla')}"/>
 
                         </h:panelGrid>
                     </p:tab>
@@ -54,11 +89,20 @@
                             In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, 
                             killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
                         
-                            <f:facet name="footer">  
-                                <h:outputText value="URL del repositorio:" />
-                                <p:inputText id="uriOP2" value="0" size="100"/>
-                                <p:commandButton id="compararOP2" value="Comparar" actionListener="#{mB_TablaControl.instertarRegistro}" update=":#{p:component('tabla')}"/>
-                            </f:facet>
+                            
+                            <h:outputText value="URL del repositorio:" />
+                            <p:inputText id="uriOP3" value="#{mB_TablaControl.op3_repositorio}" size="100"/>
+
+                            <h:outputText value=" " />
+                            <h:panelGroup>
+                                <h:outputText value="Usar repositorio de prueba: " />
+                                <p:selectBooleanCheckbox value="#{mB_TablaControl.pruebaRepositorio}" >
+                                    <p:ajax global="false" update="uriOP3" listener="#{mB_TablaControl.setPruebaRepositorio}" />
+                                </p:selectBooleanCheckbox>
+                            </h:panelGroup>
+                            
+                            <p:commandButton id="compararOP3" value="Comparar" actionListener="#{mB_TablaControl.compararRepositorio}" update=":#{p:component('tabla')}"/>
+                 
                         
                         </h:panelGrid>
                     </p:tab>
@@ -71,16 +115,18 @@
                             killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
 
                             <h:outputText value="URI RDF1:" />
-                            <p:inputText id="uri1OP2" value="0" size="100"/>
+                            <p:inputText id="uri1OP4" value="0" size="100"/>
                             <h:outputText value="URI RDF2:" />
-                            <p:inputText id="uri2OP2" value="0" size="100"/>
-                            <p:commandButton id="compararOP3" value="Comparar" actionListener="#{mB_TablaControl.insertarregristro2}" update=":#{p:component('tabla')}"/>
+                            <p:inputText id="uri2OP4" value="0" size="100"/>
+                            <p:commandButton id="compararOP4" value="Comparar" actionListener="#{mB_TablaControl.insertarregristro2}" update=":#{p:component('tabla')}"/>
     
                         </h:panelGrid>
                     </p:tab>
                 </p:accordionPanel>
                 
             </p:panel>
+            
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             
             <br/><br/>
             
@@ -137,6 +183,31 @@
                     </f:facet>
                     <h:outputText value="#{reg.similitud}" />
                 </p:column>
+                
+                
+                <f:facet name="footer">
+                        <p:toolbar>
+                            <p:toolbarGroup align="right">
+
+                                <p:menuButton value="Save as">
+
+                                    <p:menuitem value="PDF" ajax="false" immediate="true">
+                                        <p:dataExporter type="pdf" target="tabla" fileName="comparissons" />
+                                    </p:menuitem>
+                                    <p:menuitem value="XLS" ajax="false" immediate="true">
+                                        <p:dataExporter type="xls" target="tabla" fileName="comparissons" />
+                                    </p:menuitem>
+                                    <p:menuitem value="CSV" ajax="false" immediate="true">
+                                        <p:dataExporter type="csv" target="tabla" fileName="comparissons" />
+                                    </p:menuitem>
+                                    <p:menuitem value="XML" ajax="false" immediate="true">
+                                        <p:dataExporter type="xml" target="tabla" fileName="comparissons" />
+                                    </p:menuitem>
+                                </p:menuButton>
+                            </p:toolbarGroup>
+
+                        </p:toolbar>
+                </f:facet>
 
             </p:dataTable>
 
@@ -145,27 +216,7 @@
             <!-- datatable -->   
             
             <!-- toolbar -->
-                <p:toolbar>
-                    <p:toolbarGroup align="right">
-                        
-                        <p:menuButton value="Save as">
-                            
-                            <p:menuitem value="PDF" ajax="false" immediate="true">
-                                <p:dataExporter type="pdf" target="tabla" fileName="comparissons" />
-                            </p:menuitem>
-                            <p:menuitem value="XLS" ajax="false" immediate="true">
-                                <p:dataExporter type="xls" target="tabla" fileName="comparissons" />
-                            </p:menuitem>
-                            <p:menuitem value="CSV" ajax="false" immediate="true">
-                                <p:dataExporter type="csv" target="tabla" fileName="comparissons" />
-                            </p:menuitem>
-                            <p:menuitem value="XML" ajax="false" immediate="true">
-                                <p:dataExporter type="xml" target="tabla" fileName="comparissons" />
-                            </p:menuitem>
-                        </p:menuButton>
-                    </p:toolbarGroup>
 
-                </p:toolbar>
             
             <!-- toolbar -->         
             
