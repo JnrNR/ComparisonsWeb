@@ -56,19 +56,42 @@ public class Registro {
     public void setSimilitud(String similitud) {
         this.similitud = similitud;
     }
+
+    public String getLinkGoogleChartOperacionA() {
+        return linkGoogleChartOperacionA;
+    }
+
+    public void setLinkGoogleChartOperacionA(String linkGoogleChartOperacionA) {
+        this.linkGoogleChartOperacionA = linkGoogleChartOperacionA;
+    }
+
+    public String getLinkGoogleChartOperacionB() {
+        return linkGoogleChartOperacionB;
+    }
+
+    public void setLinkGoogleChartOperacionB(String lonkGoogleChartOperacionB) {
+        this.linkGoogleChartOperacionB = lonkGoogleChartOperacionB;
+    }
+    
+    
     
     private String servicioA;
     private String servicioB;
     private String operacionA;
     private String operacionB;
     private String similitud;
+    private String linkGoogleChartOperacionA;
+    private String linkGoogleChartOperacionB;
     
-    public Registro(String servicioA, String operacionA, String servicioB, String operacionB, String similitud){
+    
+    public Registro(String servicioA, String operacionA, String servicioB, String operacionB, String linkGoogleChartOperacionA, String linkGoogleChartOperacionB, String similitud){
         this.operacionA = operacionA;
         this.operacionB = operacionB;
         this.servicioA = servicioA;
         this.servicioB = servicioB;
         this.similitud = similitud;
+        this.linkGoogleChartOperacionA = linkGoogleChartOperacionA;
+        this.linkGoogleChartOperacionB = linkGoogleChartOperacionB;
     }
     
 }

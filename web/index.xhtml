@@ -132,7 +132,7 @@
             
             <!-- DataTable -->
             
-            <p:dataTable id="tabla" var="reg"  paginator="true" rows="10"
+            <p:dataTable id="tabla" var="reg"  paginator="true" paginatorPosition="bottom" rows="10"
                          selectionMode="single"  selection="#{mB_TablaControl.registroSeleccionado}" 
                          rowKey="#{reg.servicioA}" rowIndexVar="rowIndex" value="#{mB_TablaControl.registros}"
                          >
@@ -140,6 +140,8 @@
                 <f:facet name="header">
                     Presiona el botón "Grafo" para visualizar los grafos de la comparación seleccionada: 
                     <p:commandButton id="viewButton" value="Grafo" icon="ui-icon-search"/>
+                    <p:commandButton process="tabla" update=":#{p:component('comparacionDetalle')}" onclick="detalle.show()" value="Detalle"  icon="ui-icon-search"/>
+                    <!-- <p:commandButton process="tabla" update=":form:comparacionDetalle" icon="ui-icon-search" value="Detalle"  /> -->
                 </f:facet>
              
                 <p:column>
@@ -184,6 +186,18 @@
                     <h:outputText value="#{reg.similitud}" />
                 </p:column>
                 
+                <p:column style="display:none">
+                    <f:facet name="header">
+                        <h:outputText value="GraphA" />
+                    </f:facet>
+                    <h:outputText value="#{reg.linkGoogleChartOperacionA}" />
+                </p:column>
+                <p:column style="display:none">
+                    <f:facet name="header">
+                        <h:outputText value="GraphB" />
+                    </f:facet>
+                    <h:outputText value="#{reg.linkGoogleChartOperacionB}" />
+                </p:column>
                 
                 <f:facet name="footer">
                         <p:toolbar>
@@ -215,10 +229,43 @@
             
             <!-- datatable -->   
             
-            <!-- toolbar -->
-
             
-            <!-- toolbar -->         
+            <!-- Mensaje detalle -->
+                    <p:dialog header="Detalles" widgetVar="detalle" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                        <p:outputPanel id="comparacionDetalle" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty mB_TablaControl.registroSeleccionado}" columnClasses="label,value">
+                                <f:facet name="header">
+                                    <iframe frameborder="0" align="left"
+                                            src="#{mB_TablaControl.registroSeleccionado.linkGoogleChartOperacionA}"
+                                        name="someName" id="someId" scrolling="auto" width="400"
+                                        height="300" marginheight="5" marginwidth="10">
+                                    </iframe>
+                                    <iframe frameborder="0" align="right"
+                                            src="#{mB_TablaControl.registroSeleccionado.linkGoogleChartOperacionB}"
+                                        name="someName1" id="someId1" scrolling="auto" width="400"
+                                        height="300" marginheight="5" marginwidth="10">
+                                    </iframe>
+                                </f:facet>
+
+                                <h:outputText value="Id:" />
+                                <h:outputText value="#{mB_TablaControl.registroSeleccionado.servicioA}" />
+
+                                <h:outputText value="Year" />
+                                <h:outputText value="#{mB_TablaControl.registroSeleccionado.servicioB}" />
+
+                                <h:outputText value="Color:" />
+                                
+
+                                <h:outputText value="Price" />
+                                
+                                
+                                
+                            </p:panelGrid>
+                        </p:outputPanel>
+                    </p:dialog>
+            
+            
+            <!-- Mensaje detalle -->         
             
         </h:form>
         
