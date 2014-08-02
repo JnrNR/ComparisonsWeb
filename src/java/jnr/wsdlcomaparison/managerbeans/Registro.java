@@ -72,9 +72,19 @@ public class Registro {
     public void setLinkGoogleChartOperacionB(String lonkGoogleChartOperacionB) {
         this.linkGoogleChartOperacionB = lonkGoogleChartOperacionB;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     
     
+    
+    private int id;
     private String servicioA;
     private String servicioB;
     private String operacionA;
@@ -84,7 +94,8 @@ public class Registro {
     private String linkGoogleChartOperacionB;
     
     
-    public Registro(String servicioA, String operacionA, String servicioB, String operacionB, String linkGoogleChartOperacionA, String linkGoogleChartOperacionB, String similitud){
+    public Registro(int id, String servicioA, String operacionA, String servicioB, String operacionB, String linkGoogleChartOperacionA, String linkGoogleChartOperacionB, String similitud){
+        this.id =id;
         this.operacionA = operacionA;
         this.operacionB = operacionB;
         this.servicioA = servicioA;

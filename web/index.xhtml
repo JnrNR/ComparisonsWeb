@@ -134,21 +134,55 @@
             
             <p:dataTable id="tabla" var="reg"  paginator="true" paginatorPosition="bottom" rows="10"
                          selectionMode="single"  selection="#{mB_TablaControl.registroSeleccionado}" 
-                         rowKey="#{reg.servicioA}" rowIndexVar="rowIndex" value="#{mB_TablaControl.registros}"
-                         >
+                         rowKey="#{reg.id}" rowIndexVar="rowIndex" value="#{mB_TablaControl.registros}"  >
  
-                <f:facet name="header">
-                    Presiona el botón "Grafo" para visualizar los grafos de la comparación seleccionada: 
-                    <p:commandButton id="viewButton" value="Grafo" icon="ui-icon-search"/>
-                    <p:commandButton process="tabla" update=":#{p:component('comparacionDetalle')}" onclick="detalle.show()" value="Detalle"  icon="ui-icon-search"/>
-                    <!-- <p:commandButton process="tabla" update=":form:comparacionDetalle" icon="ui-icon-search" value="Detalle"  /> -->
+                
+                
+                <f:facet name="header">                  
+                        <p:menubar>
+                            <p:submenu label="Save" icon="ui-icon-disk">
+                                <p:submenu label="Table as" icon="ui-icon-calculator">
+                                        <p:menuitem value="PDF" ajax="false" immediate="true">
+                                            <p:dataExporter type="pdf" target="tabla" fileName="comparissons" />
+                                        </p:menuitem>
+                                        <p:menuitem value="XLS" ajax="false" immediate="true">
+                                            <p:dataExporter type="xls" target="tabla" fileName="comparissons" />
+                                        </p:menuitem>
+                                        <p:menuitem value="CSV" ajax="false" immediate="true">
+                                            <p:dataExporter type="csv" target="tabla" fileName="comparissons" />
+                                        </p:menuitem>
+                                        <p:menuitem value="XML" ajax="false" immediate="true">
+                                            <p:dataExporter type="xml" target="tabla" fileName="comparissons" />
+                                        </p:menuitem>
+                                </p:submenu>
+                                <p:submenu label="Page as" icon="ui-icon-document">
+                                        <p:menuitem value="PDF" ajax="false" immediate="true">
+                                            <p:dataExporter type="pdf" target="tabla" fileName="comparissons" pageOnly="true" />
+                                        </p:menuitem>
+                                        <p:menuitem value="XLS" ajax="false" immediate="true">
+                                            <p:dataExporter type="xls" target="tabla" fileName="comparissons" pageOnly="true" />
+                                        </p:menuitem>
+                                        <p:menuitem value="CSV" ajax="false" immediate="true">
+                                            <p:dataExporter type="csv" target="tabla" fileName="comparissons" pageOnly="true" />
+                                        </p:menuitem>
+                                        <p:menuitem value="XML" ajax="false" immediate="true">
+                                            <p:dataExporter type="xml" target="tabla" fileName="comparissons" pageOnly="true" />
+                                        </p:menuitem>
+                                </p:submenu>
+                            </p:submenu>
+                            <f:facet name="options">
+                                <p:commandButton style="float: right;" process="tabla" update=":#{p:component('comparacionDetalle')}" onclick="detalle.show()" value="Detalle"  icon="ui-icon-search" />
+                            </f:facet>
+                            
+                        </p:menubar>        
+                    
                 </f:facet>
              
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Comparación" />
                     </f:facet>
-                    <h:outputText value="#{rowIndex+1}" />
+                    <h:outputText value="#{reg.id}" />
                 </p:column>
                 
                 <p:column>
@@ -186,43 +220,19 @@
                     <h:outputText value="#{reg.similitud}" />
                 </p:column>
                 
-                <p:column style="display:none">
+                <p:column style="display:none" exportable="false">
                     <f:facet name="header">
                         <h:outputText value="GraphA" />
                     </f:facet>
                     <h:outputText value="#{reg.linkGoogleChartOperacionA}" />
                 </p:column>
-                <p:column style="display:none">
+                <p:column style="display:none" exportable="false">
                     <f:facet name="header">
                         <h:outputText value="GraphB" />
                     </f:facet>
                     <h:outputText value="#{reg.linkGoogleChartOperacionB}" />
                 </p:column>
                 
-                <f:facet name="footer">
-                        <p:toolbar>
-                            <p:toolbarGroup align="right">
-
-                                <p:menuButton value="Save as">
-
-                                    <p:menuitem value="PDF" ajax="false" immediate="true">
-                                        <p:dataExporter type="pdf" target="tabla" fileName="comparissons" />
-                                    </p:menuitem>
-                                    <p:menuitem value="XLS" ajax="false" immediate="true">
-                                        <p:dataExporter type="xls" target="tabla" fileName="comparissons" />
-                                    </p:menuitem>
-                                    <p:menuitem value="CSV" ajax="false" immediate="true">
-                                        <p:dataExporter type="csv" target="tabla" fileName="comparissons" />
-                                    </p:menuitem>
-                                    <p:menuitem value="XML" ajax="false" immediate="true">
-                                        <p:dataExporter type="xml" target="tabla" fileName="comparissons" />
-                                    </p:menuitem>
-                                </p:menuButton>
-                            </p:toolbarGroup>
-
-                        </p:toolbar>
-                </f:facet>
-
             </p:dataTable>
 
             
@@ -231,37 +241,52 @@
             
             
             <!-- Mensaje detalle -->
-                    <p:dialog header="Detalles" widgetVar="detalle" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <p:dialog header="Detalles" widgetVar="detalle" modal="true" showEffect="clip" hideEffect="clip" 
+                      resizable="false" height="500" width="860">
                         <p:outputPanel id="comparacionDetalle" style="text-align:center;">
-                            <p:panelGrid  columns="2" rendered="#{not empty mB_TablaControl.registroSeleccionado}" columnClasses="label,value">
-                                <f:facet name="header">
-                                    <iframe frameborder="0" align="left"
+  
+                            <p:layout style="max-width:850px;max-height:500px;text-align:left" rendered="#{not empty mB_TablaControl.registroSeleccionado}">
+                                
+                                <p:layoutUnit position="north" size="60">
+                                    <h:outputText value="Operational similarity:  " style="font-weight:bold;" />
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.similitud}" /><h:outputText value="%" /><br/>
+                                    <h:outputText value="Input message similarity:  " style="font-weight:bold;" />
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.similitud}" /><h:outputText value="%" /><br/>
+                                    <h:outputText value="Output message similarity:  " style="font-weight:bold;" />
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.similitud}" /><h:outputText value="%" /><br/>
+                                </p:layoutUnit>
+                                
+                                
+                                <p:layoutUnit position="west" size="410" style="border: 0px">
+                                    <h:outputText value="Operation A" style="font-weight:bold;color:darkslategray;"/><br/><br/>
+                                    <iframe frameborder="0" align="center"
                                             src="#{mB_TablaControl.registroSeleccionado.linkGoogleChartOperacionA}"
-                                        name="someName" id="someId" scrolling="auto" width="400"
+                                        name="operacionA" id="opA" scrolling="auto" width="400"
                                         height="300" marginheight="5" marginwidth="10">
                                     </iframe>
-                                    <iframe frameborder="0" align="right"
+                                    <h:outputText value="Service:" style="font-weight:bold;" /><br/>
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.servicioA}" /><br/>
+                                    <h:outputText value="Operation:" style="font-weight:bold;" /><br/>
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.operacionA}" /><br/>
+                                </p:layoutUnit>
+
+                                <p:layoutUnit position="center" size="430" style="border: 0px">
+                                    <h:outputText value="Operation B" style="font-weight:bold;color:darkslategray;"/><br/><br/>
+                                    <iframe frameborder="0" align="center"
                                             src="#{mB_TablaControl.registroSeleccionado.linkGoogleChartOperacionB}"
-                                        name="someName1" id="someId1" scrolling="auto" width="400"
+                                        name="operacionB" id="opB" scrolling="auto" width="400"
                                         height="300" marginheight="5" marginwidth="10">
                                     </iframe>
-                                </f:facet>
+                                    <h:outputText value="Service:" style="font-weight:bold;" /><br/>
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.servicioB}" /><br/>
+                                    <h:outputText value="Operation:" style="font-weight:bold;" /><br/>
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.operacionB}" /><br/>
+                                </p:layoutUnit>
 
-                                <h:outputText value="Id:" />
-                                <h:outputText value="#{mB_TablaControl.registroSeleccionado.servicioA}" />
-
-                                <h:outputText value="Year" />
-                                <h:outputText value="#{mB_TablaControl.registroSeleccionado.servicioB}" />
-
-                                <h:outputText value="Color:" />
-                                
-
-                                <h:outputText value="Price" />
-                                
-                                
-                                
-                            </p:panelGrid>
+                            </p:layout>                            
+        
                         </p:outputPanel>
+                
                     </p:dialog>
             
             

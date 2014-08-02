@@ -143,7 +143,7 @@ public class MB_TablaControl {
         List<MatcherResult> resultados;
         resultados = comparador.matchWSDLOnetoOne_URL(op1_wsdl1, op1_wsdl2);
         for(int i=0; i<resultados.size(); i++){
-            registros.add(new Registro(resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+            registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
         }
 
     }
@@ -154,7 +154,7 @@ public class MB_TablaControl {
         List<MatcherResult> resultados;
         resultados = comparador.matchWSDLAndDirectory_URL(op2_patron, op2_repositorio);
         for(int i=0; i<resultados.size(); i++){
-            registros.add(new Registro(resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+            registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
         }
 
     }
@@ -165,7 +165,7 @@ public class MB_TablaControl {
         List<MatcherResult> resultados;
         resultados = comparador.matchWSDLDirectory_URL(op3_repositorio);
         for(int i=0; i<resultados.size(); i++){
-            registros.add(new Registro(resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+            registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
         }
 
     } 
@@ -173,7 +173,7 @@ public class MB_TablaControl {
     public void insertarregristro2(){
         System.out.println("LEYENDO DIRECTORIO");
         Directorio.listarElementosDirectorio(".");
-        registros.add(new Registro(" ", " ", " ", " ", " ", " ", " "));
+        registros.add(new Registro(0, " ", " ", " ", " ", " ", " ", " "));
     }
    
     
