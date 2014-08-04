@@ -6,16 +6,19 @@
 
 package jnr.wsdlcomaparison.managerbeans;
 
+import com.predic8.xml.util.ResourceDownloadException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 import jnr.operationsmatcher.MatcherResult;
 import jnr.operationsmatcher.TreeMatcher;
 import jnr.utilities.Directorio;
+
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -141,9 +144,15 @@ public class MB_TablaControl {
         registros = new ArrayList<Registro>();
                 
         List<MatcherResult> resultados;
-        resultados = comparador.matchWSDLOnetoOne_URL(op1_wsdl1, op1_wsdl2);
-        for(int i=0; i<resultados.size(); i++){
-            registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+        try{
+            resultados = comparador.matchWSDLOnetoOne_URL(op1_wsdl1, op1_wsdl2);
+            for(int i=0; i<resultados.size(); i++){
+                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+            }
+        }catch(ResourceDownloadException e){
+            Mensajes.errorStandard("Error", "Se excedio el tiempo de respuesta del repositorio\tError>" + e.toString());
+        }catch(Exception e){
+            Mensajes.errorStandard("Error", "Se produjo un error durante la comparacion\tError>" + e.toString());
         }
 
     }
@@ -152,20 +161,32 @@ public class MB_TablaControl {
         registros = new ArrayList<Registro>();
                 
         List<MatcherResult> resultados;
-        resultados = comparador.matchWSDLAndDirectory_URL(op2_patron, op2_repositorio);
-        for(int i=0; i<resultados.size(); i++){
-            registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+        try{
+            resultados = comparador.matchWSDLAndDirectory_URL(op2_patron, op2_repositorio);
+            for(int i=0; i<resultados.size(); i++){
+                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+            }
+        }catch(ResourceDownloadException e){
+            Mensajes.errorStandard("Error", "Se excedio el tiempo de respuesta del repositorio\tError>" + e.toString());
+        }catch(Exception e){
+            Mensajes.errorStandard("Error", "Se produjo un error durante la comparacion\tError>" + e.toString());
         }
-
+        
     }
     
     public void compararRepositorio(){
         registros = new ArrayList<Registro>();
                 
         List<MatcherResult> resultados;
-        resultados = comparador.matchWSDLDirectory_URL(op3_repositorio);
-        for(int i=0; i<resultados.size(); i++){
-            registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+        try{
+            resultados = comparador.matchWSDLDirectory_URL(op3_repositorio);
+            for(int i=0; i<resultados.size(); i++){
+                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+            }
+        }catch(ResourceDownloadException e){
+            Mensajes.errorStandard("Error", "Se excedio el tiempo de respuesta del repositorio\tError>" + e.toString());
+        }catch(Exception e){
+            Mensajes.errorStandard("Error", "Se produjo un error durante la comparacion\tError>" + e.toString());
         }
 
     } 
@@ -202,6 +223,12 @@ public class MB_TablaControl {
         }else{
             op3_repositorio = "";
         }
+    }
+    
+    public void manejadorUpload(FileUploadEvent event){
+        UploadedFile file = event.getFile();
+        Mensajes.infoStandard("Succesfull Upload", " " + file.getFileName() + " is uploaded.");
+
     }
     
     

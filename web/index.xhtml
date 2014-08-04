@@ -106,7 +106,7 @@
                         
                         </h:panelGrid>
                     </p:tab>
-                    <p:tab title="Comparación entre dos operaciones almacenadas en formato RDF">
+                    <p:tab title="Convertir operaciones de especificaciones WSDL en archivos RDF">
                         <h:panelGrid columns="2" cellpadding="10">
                             
                             <p:graphicImage value="resources/images/rdfLogo.gif" height="64" width="59" />
@@ -114,11 +114,9 @@
                             In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, 
                             killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
 
-                            <h:outputText value="URI RDF1:" />
-                            <p:inputText id="uri1OP4" value="0" size="100"/>
-                            <h:outputText value="URI RDF2:" />
-                            <p:inputText id="uri2OP4" value="0" size="100"/>
-                            <p:commandButton id="compararOP4" value="Comparar" actionListener="#{mB_TablaControl.insertarregristro2}" update=":#{p:component('tabla')}"/>
+                            <h:outputText value=" " />
+                            <p:fileUpload fileUploadListener="#{mB_TablaControl.manejadorUpload}" mode="advanced" dragDropSupport="false"
+                                          multiple="true" sizeLimit="100000" allowTypes="/(\.|\/)(wsdl)$/" />
     
                         </h:panelGrid>
                     </p:tab>
