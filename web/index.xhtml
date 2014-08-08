@@ -115,9 +115,59 @@
                             killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
 
                             <h:outputText value=" " />
-                            <p:fileUpload fileUploadListener="#{mB_TablaControl.manejadorUpload}" mode="advanced" dragDropSupport="false"
-                                          multiple="true" sizeLimit="100000" allowTypes="/(\.|\/)(wsdl)$/" />
-    
+                            <p:wizard widgetVar="wiz" flowListener="#{mB_TablaControl.wizardRDFflow}" showNavBar="false">
+                                    
+                                    <p:tab id="uploading" title="Subir Archivos WSDL">
+                                        <p:panel header="Seleccion de especificaciones Web">
+                                            <p:messages />
+                                                <h:outputText value=" " />   
+                                                <p:fileUpload fileUploadListener="#{mB_TablaControl.manejadorUpload}" mode="advanced" dragDropSupport="false"
+                                                              multiple="true" sizeLimit="100000" allowTypes="/(\.|\/)(wsdl)$/" />
+
+                                            <h:panelGrid columns="2" columnClasses="label, value">
+                                                <h:outputLink value="#" onclick="wiz.back();">Back</h:outputLink>
+                                                <h:outputLink value="#" onclick="wiz.next();">Next</h:outputLink>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:tab>
+                                
+                                    <p:tab id="generating" title="Obtener representaciones RDF">
+                                        <p:panel header="Calculo de representaciones">
+                                            <p:messages />
+                                            <h:panelGrid columns="2" columnClasses="label, value">
+                                                <h:outputText value="Procesar archivos WSDL: *" />
+                                                <p:commandButton immediate="true" value="Obtener RDF" actionListener="#{mB_TablaControl.gettingRDFs}" oncomplete="wiz.loadStep (wiz.cfg.steps [2], true)"/>
+                                            </h:panelGrid>
+                                            
+                                            <h:panelGrid columns="2" columnClasses="label, value">
+                                                <h:outputLink value="#" onclick="wiz.back();">Back</h:outputLink>
+                                            </h:panelGrid>
+                                            
+                                        </p:panel>
+                                    </p:tab>
+                                
+                                    <p:tab id="downloading" title="Descarga">
+                                        <p:panel header="Descarga de representaciones RDF">
+                                            <p:messages />
+                                            <h:panelGrid columns="2" columnClasses="label, value">
+                                                <h:outputText value="Enlace de Descarga: " />
+                                                 <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                                    <p:fileDownload value="#{mB_TablaControl.file}" />
+                                                </p:commandButton>
+                                                <h:outputText value="Validador RDF: " />
+                                                <a href="http://www.w3.org/RDF/Validator/">http://www.w3.org/RDF/Validator/</a>  
+                                            </h:panelGrid>
+                                            
+                                            <h:panelGrid columns="2" columnClasses="label, value">
+                                                <h:outputLink value="#" onclick="wiz.back();">Back</h:outputLink>
+                                            </h:panelGrid>
+                                            
+                                            
+                                        </p:panel>
+                                    </p:tab>
+                            
+                            </p:wizard>
+                            
                         </h:panelGrid>
                     </p:tab>
                 </p:accordionPanel>
@@ -291,6 +341,16 @@
             <!-- Mensaje detalle -->         
             
         </h:form>
+        
+        <script type="text/javascript">
+            function start() {
+                PF('statusDialog').show();
+            }
+
+            function stop() {
+                PF('statusDialog').hide();
+            }
+        </script>
         
         
     </h:body>

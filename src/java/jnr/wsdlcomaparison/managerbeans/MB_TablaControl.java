@@ -7,17 +7,36 @@
 package jnr.wsdlcomaparison.managerbeans;
 
 import com.predic8.xml.util.ResourceDownloadException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.activation.MimetypesFileTypeMap;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import jnr.operationsmatcher.MatcherResult;
 import jnr.operationsmatcher.TreeMatcher;
+import jnr.utilities.CompresionDeDatos;
 import jnr.utilities.Directorio;
+import org.apache.commons.io.FilenameUtils;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.FlowEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -28,6 +47,11 @@ import org.primefaces.model.UploadedFile;
 @ViewScoped
 public class MB_TablaControl {
 
+    private boolean skip;
+    private StreamedContent file;
+    
+    private String sesionKey;
+    private String projectPath;
    
     private List<Registro> registros;
     private Registro registroSeleccionado;
@@ -127,6 +151,19 @@ public class MB_TablaControl {
     public List<Registro> getRegistros() {
         return registros;
     }
+
+    public StreamedContent getFile() {
+        return file;
+    }
+
+    public void setFile(StreamedContent file) {
+        this.file = file;
+    }
+    
+    
+    
+    
+    
     /**
      * Creates a new instance of MB_TablaControl
      */
@@ -135,7 +172,15 @@ public class MB_TablaControl {
         
         comparador = new TreeMatcher();
 
-        //registros.add(new Registro("SA00", "OA00", "SB00", "OB00", "S00"));
+        FacesContext facesContext = FacesContext.getCurrentInstance();  
+        ExternalContext externalContext = facesContext.getExternalContext();  
+        HttpSession session = (HttpSession)externalContext.getSession(true);  
+        
+        sesionKey = session.getId() + "_" + Long.toString(System.currentTimeMillis());
+        projectPath = externalContext.getRealPath("/");
+        
+        new File("ComparisonsWeb_TMP").mkdirs();
+        
     }
     
     
@@ -228,7 +273,56 @@ public class MB_TablaControl {
     public void manejadorUpload(FileUploadEvent event){
         UploadedFile file = event.getFile();
         Mensajes.infoStandard("Succesfull Upload", " " + file.getFileName() + " is uploaded.");
+        Mensajes.infoStandard("sessionKey", sesionKey);
+        
+        new File("ComparisonsWeb_TMP/"+sesionKey).mkdirs();
+        new File("ComparisonsWeb_TMP/"+sesionKey+"/WSDL").mkdirs();
+        new File("ComparisonsWeb_TMP/"+sesionKey+"/RDF").mkdirs();
+        
+        File tmpfile = new File("ComparisonsWeb_TMP/"+sesionKey+"/WSDL/"+file.getFileName());  
+        
+        try {
+            InputStream is = event.getFile().getInputstream();
+            OutputStream out = new FileOutputStream(tmpfile);
+            byte buf[] = new byte[1024];
+            int len;
+            while ((len = is.read(buf)) > 0)
+                out.write(buf, 0, len);
+            is.close();
+            out.close();
+            
+            Mensajes.infoStandard("Ubicacion","ComparisonsWeb_TMP/"+sesionKey+"/WSDL/"+file.getFileName());
+        }catch(Exception e){
+            Mensajes.fatalStandard("Error creando archivo", e.toString());
+        }
+    }
+    
+    public void gettingRDFs(){
+        
+        comparador.getRDFsFromDirectory("ComparisonsWeb_TMP/"+sesionKey+"/WSDL", "ComparisonsWeb_TMP/"+sesionKey+"/RDF");
+        
+        CompresionDeDatos compresor = new CompresionDeDatos();
+        compresor.directorioZip("ComparisonsWeb_TMP/"+sesionKey+"/RDF", "ComparisonsWeb_TMP/"+sesionKey+"/"+sesionKey+".zip");
 
+        try {        
+            File zipFile = new File("ComparisonsWeb_TMP/"+sesionKey+"/"+sesionKey+".zip");
+            InputStream stream;
+            stream = new FileInputStream (zipFile);
+            file = new DefaultStreamedContent(stream, "compress/zip", sesionKey+".zip");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MB_TablaControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public String wizardRDFflow(FlowEvent event) {
+        if(skip) {
+            skip = false;   //reset in case user goes back
+            return "confirm";
+        }
+        else {
+            return event.getNewStep();
+        }
     }
     
     
