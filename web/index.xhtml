@@ -5,14 +5,12 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>WSDL comparison and RDF representation</title>
         <h:outputStylesheet name="css/primeStyle.css"  />
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        
+
+               
         <!--Progrmando controles PrimeFaces-->
 
         <p:ajaxStatus onstart="statusDialog.show()" onsuccess="statusDialog.hide()"/>  
@@ -25,10 +23,10 @@
         <h:form>
             
             
-            <p:panel header="Opciones de Comparación" toggleable="true" toggleSpeed="500">
+            <p:panel header="WSDL comparison and RDF representation tools" toggleable="true" toggleSpeed="500">
                 
                 <p:accordionPanel>
-                    <p:tab title="Comparación entre dos archivos WSDL">
+                    <p:tab title="Comparison between two WSDL files">
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:graphicImage value="resources/images/wsdlIcon.png" height="64" width="64" />
                             <h:outputText
@@ -55,9 +53,9 @@
 
                         </h:panelGrid>
                     </p:tab>
-                    <p:tab title="Comparación entre un archivo WSDL y los archivos WSDL de un repositorio">
+                    <p:tab title="Comparison between a WSDL file and all WSDL files of a repository">
                         <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage value="resources/images/wsdlIcon.png" height="64" width="64" />
+                            <p:graphicImage value="resources/images/wsdlVSrepository.png" height="64" width="64" />
                             <h:outputText
                                 value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
                                 His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. T
@@ -82,9 +80,9 @@
 
                         </h:panelGrid>
                     </p:tab>
-                    <p:tab title="Comparación entre los archivos WSDL de un repositorio">
+                    <p:tab title="Comparison between all WSDL files of a repository">
                         <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage value="resources/images/repository.png" height="64" width="64" />
+                            <p:graphicImage value="resources/images/repositoryIcon.png" height="64" width="64" />
                             <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. 
                             In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, 
                             killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
@@ -106,7 +104,56 @@
                         
                         </h:panelGrid>
                     </p:tab>
-                    <p:tab title="Convertir operaciones de especificaciones WSDL en archivos RDF">
+                    
+                    
+                    
+                    <p:tab title="Comparison between all uploaded WSDL files">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            
+                            <p:graphicImage value="resources/images/repositoryUploadIcon.png" height="64" width="59" />
+                            <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. 
+                            In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, 
+                            killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
+
+                            <h:outputText value=" " />
+                            <p:wizard widgetVar="wizz" flowListener="#{mB_TablaControl.wizardRDFflow}" showNavBar="false">
+                                    
+                                    <p:tab id="Uploading" title="Uploading WSDL">
+                                        <p:panel header="Select and upload Web services specifications">
+                                            <p:messages />
+                                                <h:outputText value=" " />   
+                                                <p:fileUpload fileUploadListener="#{mB_TablaControl.manejadorUploadComparacion}" mode="advanced" dragDropSupport="false"
+                                                              multiple="true" sizeLimit="100000" allowTypes="/(\.|\/)(wsdl)$/" />
+
+                                            <h:panelGrid columns="2" columnClasses="label, value">
+                                                <h:outputLink value="#" onclick="wizz.back();">Back</h:outputLink>
+                                                <h:outputLink value="#" onclick="wizz.next();">Next</h:outputLink>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:tab>
+                                
+                                    <p:tab id="Comparison" title="Comparison">
+                                        <p:panel header="Calculo de representaciones">
+                                            <p:messages />
+                                            <h:panelGrid columns="2" columnClasses="label, value">
+                                                <h:outputText value="" />
+                                                <p:commandButton immediate="true" value="Compare" actionListener="#{mB_TablaControl.compararPorWizard}" update=":#{p:component('tabla')}"/>
+                                            </h:panelGrid>
+                                            
+                                            <h:panelGrid columns="2" columnClasses="label, value">
+                                                <h:outputLink value="#" onclick="wizz.back();">Back</h:outputLink>
+                                            </h:panelGrid>
+                                            
+                                        </p:panel>
+                                    </p:tab>                            
+                            </p:wizard>
+                            
+                        </h:panelGrid>
+                    </p:tab>
+                    
+                    
+                    
+                    <p:tab title="Conversion of WSDL operations into RDF files">
                         <h:panelGrid columns="2" cellpadding="10">
                             
                             <p:graphicImage value="resources/images/rdfLogo.gif" height="64" width="59" />
@@ -117,7 +164,7 @@
                             <h:outputText value=" " />
                             <p:wizard widgetVar="wiz" flowListener="#{mB_TablaControl.wizardRDFflow}" showNavBar="false">
                                     
-                                    <p:tab id="uploading" title="Subir Archivos WSDL">
+                                    <p:tab id="uploading" title="Uploading WSDL">
                                         <p:panel header="Seleccion de especificaciones Web">
                                             <p:messages />
                                                 <h:outputText value=" " />   
@@ -131,7 +178,7 @@
                                         </p:panel>
                                     </p:tab>
                                 
-                                    <p:tab id="generating" title="Obtener representaciones RDF">
+                                    <p:tab id="generating" title="Getting RDF representations">
                                         <p:panel header="Calculo de representaciones">
                                             <p:messages />
                                             <h:panelGrid columns="2" columnClasses="label, value">
@@ -146,12 +193,12 @@
                                         </p:panel>
                                     </p:tab>
                                 
-                                    <p:tab id="downloading" title="Descarga">
+                                    <p:tab id="downloading" title="Download">
                                         <p:panel header="Descarga de representaciones RDF">
                                             <p:messages />
                                             <h:panelGrid columns="2" columnClasses="label, value">
-                                                <h:outputText value="Enlace de Descarga: " />
-                                                 <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                                <p:graphicImage value="resources/images/downloadZipIcon.png" height="64" width="64" />
+                                                <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
                                                     <p:fileDownload value="#{mB_TablaControl.file}" />
                                                 </p:commandButton>
                                                 <h:outputText value="Validador RDF: " />
@@ -228,44 +275,58 @@
              
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Comparación" />
+                        <h:outputText value="ID" />
                     </f:facet>
                     <h:outputText value="#{reg.id}" />
                 </p:column>
                 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="SW A" />
+                        <h:outputText value="WS A" />
                     </f:facet>
                     <h:outputText value="#{reg.servicioA}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Operación A" />
+                        <h:outputText value="Operation A" />
                     </f:facet>
                     <h:outputText value="#{reg.operacionA}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="SW B" />
+                        <h:outputText value="WS B" />
                     </f:facet>
                     <h:outputText value="#{reg.servicioB}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Operación B" />
+                        <h:outputText value="Operation B" />
                     </f:facet>
                     <h:outputText value="#{reg.operacionB}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Similitud" />
+                        <h:outputText value="%Operation" />
                     </f:facet>
-                    <h:outputText value="#{reg.similitud}" />
+                    <h:outputText value="#{reg.similitudT}" />
+                </p:column>
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="%Input" />
+                    </f:facet>
+                    <h:outputText value="#{reg.similitudE}" />
+                </p:column>
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="%Output" />
+                    </f:facet>
+                    <h:outputText value="#{reg.similitudS}" />
                 </p:column>
                 
                 <p:column style="display:none" exportable="false">
@@ -290,22 +351,22 @@
             
             <!-- Mensaje detalle -->
             <p:dialog header="Detalles" widgetVar="detalle" modal="true" showEffect="clip" hideEffect="clip" 
-                      resizable="false" height="500" width="860">
+                      resizable="false" height="500" width="890">
                         <p:outputPanel id="comparacionDetalle" style="text-align:center;">
   
-                            <p:layout style="max-width:850px;max-height:500px;text-align:left" rendered="#{not empty mB_TablaControl.registroSeleccionado}">
+                            <p:layout style="max-width:880px;max-height:500px;text-align:left" rendered="#{not empty mB_TablaControl.registroSeleccionado}">
                                 
                                 <p:layoutUnit position="north" size="60">
                                     <h:outputText value="Operational similarity:  " style="font-weight:bold;" />
-                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.similitud}" /><h:outputText value="%" /><br/>
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.similitudT}" /><h:outputText value="%" /><br/>
                                     <h:outputText value="Input message similarity:  " style="font-weight:bold;" />
-                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.similitud}" /><h:outputText value="%" /><br/>
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.similitudE}" /><h:outputText value="%" /><br/>
                                     <h:outputText value="Output message similarity:  " style="font-weight:bold;" />
-                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.similitud}" /><h:outputText value="%" /><br/>
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.similitudS}" /><h:outputText value="%" /><br/>
                                 </p:layoutUnit>
                                 
                                 
-                                <p:layoutUnit position="west" size="410" style="border: 0px">
+                                <p:layoutUnit position="west" size="427" style="border: 0px">
                                     <h:outputText value="Operation A" style="font-weight:bold;color:darkslategray;"/><br/><br/>
                                     <iframe frameborder="0" align="center"
                                             src="#{mB_TablaControl.registroSeleccionado.linkGoogleChartOperacionA}"
@@ -315,10 +376,14 @@
                                     <h:outputText value="Service:" style="font-weight:bold;" /><br/>
                                     <h:outputText value="#{mB_TablaControl.registroSeleccionado.servicioA}" /><br/>
                                     <h:outputText value="Operation:" style="font-weight:bold;" /><br/>
-                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.operacionA}" /><br/>
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.operacionA}" /><br/><br/>
+                                    
+                                    <p:panel id="DotA" header="Dot representation" toggleable="true" toggleSpeed="500" closeSpeed="500" style="margin-bottom:20px" collapsed="true">
+                                        <p:inputTextarea rows="10" cols="67" value="#{mB_TablaControl.registroSeleccionado.linkGoogleChartOperacionA}" autoResize="false"/>
+                                    </p:panel>
                                 </p:layoutUnit>
 
-                                <p:layoutUnit position="center" size="430" style="border: 0px">
+                                <p:layoutUnit position="center" size="442" style="border: 0px">
                                     <h:outputText value="Operation B" style="font-weight:bold;color:darkslategray;"/><br/><br/>
                                     <iframe frameborder="0" align="center"
                                             src="#{mB_TablaControl.registroSeleccionado.linkGoogleChartOperacionB}"
@@ -328,7 +393,11 @@
                                     <h:outputText value="Service:" style="font-weight:bold;" /><br/>
                                     <h:outputText value="#{mB_TablaControl.registroSeleccionado.servicioB}" /><br/>
                                     <h:outputText value="Operation:" style="font-weight:bold;" /><br/>
-                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.operacionB}" /><br/>
+                                    <h:outputText value="#{mB_TablaControl.registroSeleccionado.operacionB}" /><br/><br/>
+                                    
+                                    <p:panel id="DotB" header="Dot representation" toggleable="true" toggleSpeed="500" closeSpeed="500" style="margin-bottom:20px" collapsed="true">
+                                        <p:inputTextarea rows="10" cols="67" value="#{mB_TablaControl.registroSeleccionado.linkGoogleChartOperacionB}" autoResize="false"/>
+                                    </p:panel>
                                 </p:layoutUnit>
 
                             </p:layout>                            

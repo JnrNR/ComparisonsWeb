@@ -49,13 +49,29 @@ public class Registro {
         this.operacionB = operacionB;
     }
 
-    public String getSimilitud() {
-        return similitud;
+    public String getSimilitudT() {
+        return similitudT;
     }
 
-    public void setSimilitud(String similitud) {
-        this.similitud = similitud;
+    public void setSimilitudT(String similitudT) {
+        this.similitudT = similitudT;
     }
+
+    public String getSimilitudE() {
+        return similitudE;
+    }
+
+    public void setSimilitudE(String similitudE) {
+        this.similitudE = similitudE;
+    }
+
+    public String getSimilitudS() {
+        return similitudS;
+    }
+
+    public void setSimilitudS(String similitudS) {
+        this.similitudS = similitudS;
+    } 
 
     public String getLinkGoogleChartOperacionA() {
         return linkGoogleChartOperacionA;
@@ -89,18 +105,22 @@ public class Registro {
     private String servicioB;
     private String operacionA;
     private String operacionB;
-    private String similitud;
+    private String similitudT;
+    private String similitudE;
+    private String similitudS;
     private String linkGoogleChartOperacionA;
     private String linkGoogleChartOperacionB;
     
     
-    public Registro(int id, String servicioA, String operacionA, String servicioB, String operacionB, String linkGoogleChartOperacionA, String linkGoogleChartOperacionB, String similitud){
+    public Registro(int id, String servicioA, String operacionA, String servicioB, String operacionB, String linkGoogleChartOperacionA, String linkGoogleChartOperacionB, String similitudT, String similitudE, String similitudS){
         this.id =id;
         this.operacionA = operacionA;
         this.operacionB = operacionB;
         this.servicioA = servicioA;
         this.servicioB = servicioB;
-        this.similitud = similitud;
+        this.similitudT = similitudT;
+        this.similitudE = similitudE;
+        this.similitudS = similitudS;
         this.linkGoogleChartOperacionA = linkGoogleChartOperacionA;
         this.linkGoogleChartOperacionB = linkGoogleChartOperacionB;
     }

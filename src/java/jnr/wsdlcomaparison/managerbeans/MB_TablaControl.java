@@ -178,8 +178,9 @@ public class MB_TablaControl {
         
         sesionKey = session.getId() + "_" + Long.toString(System.currentTimeMillis());
         projectPath = externalContext.getRealPath("/");
+        projectPath = projectPath.replace("\\", "/");
         
-        new File("ComparisonsWeb_TMP").mkdirs();
+        new File(projectPath + "TMP").mkdirs();
         
     }
     
@@ -192,7 +193,7 @@ public class MB_TablaControl {
         try{
             resultados = comparador.matchWSDLOnetoOne_URL(op1_wsdl1, op1_wsdl2);
             for(int i=0; i<resultados.size(); i++){
-                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje()), "-1000", "-1000"));
             }
         }catch(ResourceDownloadException e){
             Mensajes.errorStandard("Error", "Se excedio el tiempo de respuesta del repositorio\tError>" + e.toString());
@@ -209,7 +210,7 @@ public class MB_TablaControl {
         try{
             resultados = comparador.matchWSDLAndDirectory_URL(op2_patron, op2_repositorio);
             for(int i=0; i<resultados.size(); i++){
-                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje()), "-1000", "-1000"));
             }
         }catch(ResourceDownloadException e){
             Mensajes.errorStandard("Error", "Se excedio el tiempo de respuesta del repositorio\tError>" + e.toString());
@@ -226,7 +227,7 @@ public class MB_TablaControl {
         try{
             resultados = comparador.matchWSDLDirectory_URL(op3_repositorio);
             for(int i=0; i<resultados.size(); i++){
-                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje())));
+                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje()), "-1000", "-1000"));
             }
         }catch(ResourceDownloadException e){
             Mensajes.errorStandard("Error", "Se excedio el tiempo de respuesta del repositorio\tError>" + e.toString());
@@ -234,12 +235,28 @@ public class MB_TablaControl {
             Mensajes.errorStandard("Error", "Se produjo un error durante la comparacion\tError>" + e.toString());
         }
 
-    } 
+    }
+    
+    public void compararPorWizard(){
+        registros = new ArrayList<Registro>();
+                
+        List<MatcherResult> resultados;
+        try{
+            resultados = comparador.matchWSDLDirectory(projectPath + "TMP/"+sesionKey+"/WSDL_C");
+            for(int i=0; i<resultados.size(); i++){
+                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje()), "-1000", "-1000"));
+            }
+
+        }catch(Exception e){
+            Mensajes.errorStandard("Error", "Se produjo un error durante la comparacion\tError>" + e.toString());
+        }
+    }
+    
     
     public void insertarregristro2(){
         System.out.println("LEYENDO DIRECTORIO");
         Directorio.listarElementosDirectorio(".");
-        registros.add(new Registro(0, " ", " ", " ", " ", " ", " ", " "));
+        registros.add(new Registro(0, " ", " ", " ", " ", " ", " ", " ", " ", " "));
     }
    
     
@@ -270,16 +287,15 @@ public class MB_TablaControl {
         }
     }
     
-    public void manejadorUpload(FileUploadEvent event){
+    public void manejadorUploadComparacion(FileUploadEvent event){
         UploadedFile file = event.getFile();
         Mensajes.infoStandard("Succesfull Upload", " " + file.getFileName() + " is uploaded.");
         Mensajes.infoStandard("sessionKey", sesionKey);
         
-        new File("ComparisonsWeb_TMP/"+sesionKey).mkdirs();
-        new File("ComparisonsWeb_TMP/"+sesionKey+"/WSDL").mkdirs();
-        new File("ComparisonsWeb_TMP/"+sesionKey+"/RDF").mkdirs();
+        new File(projectPath + "TMP/"+sesionKey).mkdirs();
+        new File(projectPath + "TMP/"+sesionKey+"/WSDL_C").mkdirs();
         
-        File tmpfile = new File("ComparisonsWeb_TMP/"+sesionKey+"/WSDL/"+file.getFileName());  
+        File tmpfile = new File(projectPath + "TMP/"+sesionKey+"/WSDL_C/"+file.getFileName());  
         
         try {
             InputStream is = event.getFile().getInputstream();
@@ -291,7 +307,35 @@ public class MB_TablaControl {
             is.close();
             out.close();
             
-            Mensajes.infoStandard("Ubicacion","ComparisonsWeb_TMP/"+sesionKey+"/WSDL/"+file.getFileName());
+            Mensajes.infoStandard("Ubicacion",projectPath + "TMP/"+sesionKey+"/WSDL_C/"+file.getFileName());
+        }catch(Exception e){
+            Mensajes.fatalStandard("Error creando archivo", e.toString());
+        }
+    }
+    
+    
+    public void manejadorUpload(FileUploadEvent event){
+        UploadedFile file = event.getFile();
+        Mensajes.infoStandard("Succesfull Upload", " " + file.getFileName() + " is uploaded.");
+        Mensajes.infoStandard("sessionKey", sesionKey);
+        
+        new File(projectPath + "TMP/"+sesionKey).mkdirs();
+        new File(projectPath + "TMP/"+sesionKey+"/WSDL").mkdirs();
+        new File(projectPath + "TMP/"+sesionKey+"/RDF").mkdirs();
+        
+        File tmpfile = new File(projectPath + "TMP/"+sesionKey+"/WSDL/"+file.getFileName());  
+        
+        try {
+            InputStream is = event.getFile().getInputstream();
+            OutputStream out = new FileOutputStream(tmpfile);
+            byte buf[] = new byte[1024];
+            int len;
+            while ((len = is.read(buf)) > 0)
+                out.write(buf, 0, len);
+            is.close();
+            out.close();
+            
+            Mensajes.infoStandard("Ubicacion",projectPath + "TMP/"+sesionKey+"/WSDL/"+file.getFileName());
         }catch(Exception e){
             Mensajes.fatalStandard("Error creando archivo", e.toString());
         }
@@ -299,13 +343,13 @@ public class MB_TablaControl {
     
     public void gettingRDFs(){
         
-        comparador.getRDFsFromDirectory("ComparisonsWeb_TMP/"+sesionKey+"/WSDL", "ComparisonsWeb_TMP/"+sesionKey+"/RDF");
+        comparador.getRDFsFromDirectory(projectPath + "TMP/"+sesionKey+"/WSDL", projectPath + "TMP/"+sesionKey+"/RDF");
         
         CompresionDeDatos compresor = new CompresionDeDatos();
-        compresor.directorioZip("ComparisonsWeb_TMP/"+sesionKey+"/RDF", "ComparisonsWeb_TMP/"+sesionKey+"/"+sesionKey+".zip");
+        compresor.directorioZip(projectPath + "TMP/"+sesionKey+"/RDF", projectPath + "TMP/"+sesionKey+"/"+sesionKey+".zip");
 
         try {        
-            File zipFile = new File("ComparisonsWeb_TMP/"+sesionKey+"/"+sesionKey+".zip");
+            File zipFile = new File(projectPath + "TMP/"+sesionKey+"/"+sesionKey+".zip");
             InputStream stream;
             stream = new FileInputStream (zipFile);
             file = new DefaultStreamedContent(stream, "compress/zip", sesionKey+".zip");
