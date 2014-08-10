@@ -193,7 +193,7 @@ public class MB_TablaControl {
         try{
             resultados = comparador.matchWSDLOnetoOne_URL(op1_wsdl1, op1_wsdl2);
             for(int i=0; i<resultados.size(); i++){
-                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje()), "-1000", "-1000"));
+                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentajeT()), Float.toString(resultados.get(i).getPorcentajeE()), Float.toString(resultados.get(i).getPorcentajeS())));
             }
         }catch(ResourceDownloadException e){
             Mensajes.errorStandard("Error", "Se excedio el tiempo de respuesta del repositorio\tError>" + e.toString());
@@ -210,7 +210,7 @@ public class MB_TablaControl {
         try{
             resultados = comparador.matchWSDLAndDirectory_URL(op2_patron, op2_repositorio);
             for(int i=0; i<resultados.size(); i++){
-                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje()), "-1000", "-1000"));
+                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentajeT()), Float.toString(resultados.get(i).getPorcentajeE()), Float.toString(resultados.get(i).getPorcentajeS())));
             }
         }catch(ResourceDownloadException e){
             Mensajes.errorStandard("Error", "Se excedio el tiempo de respuesta del repositorio\tError>" + e.toString());
@@ -227,7 +227,7 @@ public class MB_TablaControl {
         try{
             resultados = comparador.matchWSDLDirectory_URL(op3_repositorio);
             for(int i=0; i<resultados.size(); i++){
-                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje()), "-1000", "-1000"));
+                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentajeT()), Float.toString(resultados.get(i).getPorcentajeE()), Float.toString(resultados.get(i).getPorcentajeS())));
             }
         }catch(ResourceDownloadException e){
             Mensajes.errorStandard("Error", "Se excedio el tiempo de respuesta del repositorio\tError>" + e.toString());
@@ -244,7 +244,7 @@ public class MB_TablaControl {
         try{
             resultados = comparador.matchWSDLDirectory(projectPath + "TMP/"+sesionKey+"/WSDL_C");
             for(int i=0; i<resultados.size(); i++){
-                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentaje()), "-1000", "-1000"));
+                registros.add(new Registro(i+1, resultados.get(i).getServicioA(), resultados.get(i).getServicioA(), resultados.get(i).getServicioB(), resultados.get(i).getEstructuraB(), resultados.get(i).getLinkGoogleChartestructuraA(), resultados.get(i).getLinkGoogleChartestructuraB(), Float.toString(resultados.get(i).getPorcentajeT()), Float.toString(resultados.get(i).getPorcentajeE()), Float.toString(resultados.get(i).getPorcentajeS())));
             }
 
         }catch(Exception e){
