@@ -28,21 +28,56 @@
                 <p:accordionPanel>
                     <p:tab title="Comparison between two WSDL files">
                         <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage value="resources/images/wsdlIcon.png" height="64" width="64" />
-                            <h:outputText
-                                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-                                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. T
-                                hrough Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, 
-                                but given to ruthless violence whenever anything stands against the good of the family." />
+                                <p:graphicImage value="resources/images/wsdlIcon.png" height="64" width="64" />
+                                <h:panelGroup>
+                                    <h:outputText
+                                        value="This option allows you to compare all Web services operations in a WSDL file with all Web 
+                                        services operations in another WSDL file.&lt;br /&gt;Results are displayed in the table below as follows:&lt;br /&gt;&lt;br /&gt;" escape="false"/>
+
+                                    <h:panelGrid columns="2" cellpadding="3">
+                                        <h:outputText value="Columns"  style="font-weight:bold;color:#ccc;"/>
+                                        <h:outputText value="Meaning" style="font-weight:bold;color:#ccc;"/>
+                                        
+                                        <h:outputText value="ID" />
+                                        <h:outputText value="Shows an identifier for every comparison done." />
+                                        
+                                        <h:outputText value="WS A and WS B" />
+                                        <h:outputText value="Show the names of the Web services compared." />
+                                        
+                                        <h:outputText value="Operation A and Operation B" />
+                                        <h:outputText value="Show the name of the operation compared related to its service, either A or B." />
+                                        
+                                        <h:outputText value=" " />
+                                        <h:outputText value=" " />
+                                        
+                                        <h:outputText value=" " />
+                                        <h:outputText value="Our algorithm compute structural correlation between two operations of Web services and provides three different results:" 
+                                                      style="color: #00A0EB;"/>
+                                        
+                                        <h:outputText value="%Operation" />
+                                        <h:outputText value="A structural comparison percentage of whole operations’ structures of the two operations compared." />
+                                        
+                                        <h:outputText value="%Input" />
+                                        <h:outputText value="A structural comparison percentage between input messages of the two operations compared." />
+                                        
+                                        <h:outputText value="%Output" />
+                                        <h:outputText value="A structural comparison percentage between output messages of the two operations compared." />
+                                        
+                                    </h:panelGrid>
+                                    
+                                    <h:outputText value="&lt;br /&gt;&lt;br /&gt;*WSDL versions supported: 1.x&lt;br /&gt;" style="font-weight:bold;color:#ff0000;" escape="false"/>
+                                    <h:outputText value="**Allowed inputs in WSDL A and B URIs are URLs of listed directories in a Web server, which elements are listed by &lt;li&gt; or &lt;td&gt; HTML tags." style="font-weight:bold;color:#ff0000;"/>
+                                </h:panelGroup>
+                            
                                       
-                                <h:outputText value="URI WSDL A:" />
+                                <h:outputText value="WSDL A URI:" />
                                 <p:inputText id="uri1OP1" value="#{mB_TablaControl.op1_wsdl1}" size="100"/>
-                                <h:outputText value="URI WSDL B:" />
+                                <h:outputText value="WSDL B URI:" />
                                 <p:inputText id="uri2OP1" value="#{mB_TablaControl.op1_wsdl2}" size="100"/>
                                 
                                 <h:outputText value=" " />
                                 <h:panelGroup>
-                                    <h:outputText value="Usar repositorio y patron de prueba: " />
+                                    <h:outputText value="Use testing WSDL URIs: " />
                                     <p:selectBooleanCheckbox value="#{mB_TablaControl.pruebaDosServicos}" >
                                         <p:ajax global="false" update="uri1OP1,uri2OP1" listener="#{mB_TablaControl.setPruebaDosServicios}" />
                                     </p:selectBooleanCheckbox>
@@ -56,20 +91,55 @@
                     <p:tab title="Comparison between a WSDL file and all WSDL files of a repository">
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:graphicImage value="resources/images/wsdlVSrepository.png" height="64" width="64" />
-                            <h:outputText
-                                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-                                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. T
-                                hrough Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, 
-                                but given to ruthless violence whenever anything stands against the good of the family." />
+                            <h:panelGroup>
+                                    <h:outputText
+                                        value="This option allows you to compare all Web services operations in a WSDL file with all 
+                                        Web services operations in all WSDL files of a repository.
+                                        &lt;br /&gt;Results are displayed in the table below as follows:&lt;br /&gt;&lt;br /&gt;" escape="false"/>
+
+                                    <h:panelGrid columns="2" cellpadding="3">
+                                        <h:outputText value="Columns"  style="font-weight:bold;color:#ccc;"/>
+                                        <h:outputText value="Meaning" style="font-weight:bold;color:#ccc;"/>
+                                        
+                                        <h:outputText value="ID" />
+                                        <h:outputText value="Shows an identifier for every comparison done." />
+                                        
+                                        <h:outputText value="WS A and WS B" />
+                                        <h:outputText value="Show the names of the Web services compared." />
+                                        
+                                        <h:outputText value="Operation A and Operation B" />
+                                        <h:outputText value="Show the name of the operation compared related to its service, either A or B." />
+                                        
+                                        <h:outputText value=" " />
+                                        <h:outputText value=" " />
+                                        
+                                        <h:outputText value=" " />
+                                        <h:outputText value="Our algorithm compute structural correlation between two operations of Web services and provides three different results:" 
+                                                      style="color: #00A0EB;"/>
+                                        
+                                        <h:outputText value="%Operation" />
+                                        <h:outputText value="A structural comparison percentage of whole operations’ structures of the two operations compared." />
+                                        
+                                        <h:outputText value="%Input" />
+                                        <h:outputText value="A structural comparison percentage between input messages of the two operations compared." />
+                                        
+                                        <h:outputText value="%Output" />
+                                        <h:outputText value="A structural comparison percentage between output messages of the two operations compared." />
+                                        
+                                    </h:panelGrid>
+                                    
+                                    <h:outputText value="&lt;br /&gt;&lt;br /&gt;*WSDL versions supported: 1.x&lt;br /&gt;" style="font-weight:bold;color:#ff0000;" escape="false"/>
+                                    <h:outputText value="**Allowed inputs in URI WSDL A and repository URL are URLs of listed directories in a Web server, which elements are listed by &lt;li&gt; or &lt;td&gt; HTML tags." style="font-weight:bold;color:#ff0000;"/>
+                            </h:panelGroup>
                                       
-                                <h:outputText value="URI WSDL:" />
+                                <h:outputText value="WSDL URI:" />
                                 <p:inputText id="uri1OP2" value="#{mB_TablaControl.op2_patron}" size="100"/>
-                                <h:outputText value="URL del repositorio:" />
+                                <h:outputText value="Repository URL:" />
                                 <p:inputText id="uri2OP2" value="#{mB_TablaControl.op2_repositorio}" size="100"/>
                                 
                                 <h:outputText value=" " />
                                 <h:panelGroup>
-                                    <h:outputText value="Usar repositorio y patron de prueba: " />
+                                    <h:outputText value="Use testing repository and testing pattern: " />
                                     <p:selectBooleanCheckbox value="#{mB_TablaControl.pruebaServiciosServico}" >
                                         <p:ajax global="false" update="uri1OP2,uri2OP2" listener="#{mB_TablaControl.setPruebaServiciosServicio}" />
                                     </p:selectBooleanCheckbox>
@@ -83,17 +153,54 @@
                     <p:tab title="Comparison between all WSDL files of a repository">
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:graphicImage value="resources/images/repositoryIcon.png" height="64" width="64" />
-                            <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. 
-                            In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, 
-                            killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
+                            <h:panelGroup>
+                                    <h:outputText
+                                        value="This option allows you to compare all Web services operations in all WSDL files of a repository, skipping 
+                                        comparisons between same operations. Doing ((N*N)/2)-N comparisons over a repository with N operations among its WSDLs.
+                                        &lt;br /&gt;Results are displayed in the table below as follows:&lt;br /&gt;&lt;br /&gt;" escape="false"/>
+
+                                    <h:panelGrid columns="2" cellpadding="3">
+                                        <h:outputText value="Columns"  style="font-weight:bold;color:#ccc;"/>
+                                        <h:outputText value="Meaning" style="font-weight:bold;color:#ccc;"/>
+                                        
+                                        <h:outputText value="ID" />
+                                        <h:outputText value="Shows an identifier for every comparison done." />
+                                        
+                                        <h:outputText value="WS A and WS B" />
+                                        <h:outputText value="Show the names of the Web services compared." />
+                                        
+                                        <h:outputText value="Operation A and Operation B" />
+                                        <h:outputText value="Show the name of the operation compared related to its service, either A or B." />
+                                        
+                                        <h:outputText value=" " />
+                                        <h:outputText value=" " />
+                                        
+                                        <h:outputText value=" " />
+                                        <h:outputText value="Our algorithm compute structural correlation between two operations of Web services and provides three different results:" 
+                                                      style="color: #00A0EB;"/>
+                                        
+                                        <h:outputText value="%Operation" />
+                                        <h:outputText value="A structural comparison percentage of whole operations’ structures of the two operations compared." />
+                                        
+                                        <h:outputText value="%Input" />
+                                        <h:outputText value="A structural comparison percentage between input messages of the two operations compared." />
+                                        
+                                        <h:outputText value="%Output" />
+                                        <h:outputText value="A structural comparison percentage between output messages of the two operations compared." />
+                                        
+                                    </h:panelGrid>
+                                    
+                                    <h:outputText value="&lt;br /&gt;&lt;br /&gt;*WSDL versions supported: 1.x&lt;br /&gt;" style="font-weight:bold;color:#ff0000;" escape="false"/>
+                                    <h:outputText value="**Allowed inputs in repository URL are URLs of listed directories in a Web server, which elements are listed by &lt;li&gt; or &lt;td&gt; HTML tags." style="font-weight:bold;color:#ff0000;"/>
+                            </h:panelGroup>
                         
                             
-                            <h:outputText value="URL del repositorio:" />
+                            <h:outputText value="Repository URL:" />
                             <p:inputText id="uriOP3" value="#{mB_TablaControl.op3_repositorio}" size="100"/>
 
                             <h:outputText value=" " />
                             <h:panelGroup>
-                                <h:outputText value="Usar repositorio de prueba: " />
+                                <h:outputText value="Use testing repository: " />
                                 <p:selectBooleanCheckbox value="#{mB_TablaControl.pruebaRepositorio}" >
                                     <p:ajax global="false" update="uriOP3" listener="#{mB_TablaControl.setPruebaRepositorio}" />
                                 </p:selectBooleanCheckbox>
@@ -111,9 +218,45 @@
                         <h:panelGrid columns="2" cellpadding="10">
                             
                             <p:graphicImage value="resources/images/repositoryUploadIcon.png" height="64" width="59" />
-                            <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. 
-                            In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, 
-                            killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
+                            <h:panelGroup>
+                                    <h:outputText
+                                        value="This option allows you to compare all Web services operations uploaded to a cloud repository, skipping comparisons between same operations. 
+                                        Doing ((N*N)/2)-N comparisons over a repository with N operations among its WSDLs.
+                                        &lt;br /&gt;Results are displayed in the table below as follows:&lt;br /&gt;&lt;br /&gt;" escape="false"/>
+
+                                    <h:panelGrid columns="2" cellpadding="3">
+                                        <h:outputText value="Columns"  style="font-weight:bold;color:#ccc;"/>
+                                        <h:outputText value="Meaning" style="font-weight:bold;color:#ccc;"/>
+                                        
+                                        <h:outputText value="ID" />
+                                        <h:outputText value="Shows an identifier for every comparison done." />
+                                        
+                                        <h:outputText value="WS A and WS B" />
+                                        <h:outputText value="Show the names of the Web services compared." />
+                                        
+                                        <h:outputText value="Operation A and Operation B" />
+                                        <h:outputText value="Show the name of the operation compared related to its service, either A or B." />
+                                        
+                                        <h:outputText value=" " />
+                                        <h:outputText value=" " />
+                                        
+                                        <h:outputText value=" " />
+                                        <h:outputText value="Our algorithm compute structural correlation between two operations of Web services and provides three different results:" 
+                                                      style="color: #00A0EB;"/>
+                                        
+                                        <h:outputText value="%Operation" />
+                                        <h:outputText value="A structural comparison percentage of whole operations’ structures of the two operations compared." />
+                                        
+                                        <h:outputText value="%Input" />
+                                        <h:outputText value="A structural comparison percentage between input messages of the two operations compared." />
+                                        
+                                        <h:outputText value="%Output" />
+                                        <h:outputText value="A structural comparison percentage between output messages of the two operations compared." />
+                                        
+                                    </h:panelGrid>
+                                    
+                                    <h:outputText value="&lt;br /&gt;&lt;br /&gt;*WSDL versions supported: 1.x" style="font-weight:bold;color:#ff0000;" escape="false"/>
+                            </h:panelGroup>
 
                             <h:outputText value=" " />
                             <p:wizard widgetVar="wizz" flowListener="#{mB_TablaControl.wizardRDFflow}" showNavBar="false">
@@ -157,9 +300,13 @@
                         <h:panelGrid columns="2" cellpadding="10">
                             
                             <p:graphicImage value="resources/images/rdfLogo.gif" height="64" width="59" />
-                            <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. 
-                            In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, 
-                            killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
+                            <h:panelGroup>
+                                    <h:outputText
+                                        value="This option allows you to convert all Web services operations to an RDF representation, extracting all operations 
+                                        contained in WSDL files uploaded. All RDF representations are given compressed in a ZIP file."/>
+
+                                    <h:outputText value="&lt;br /&gt;&lt;br /&gt;*WSDL versions supported: 1.x" style="font-weight:bold;color:#ff0000;" escape="false"/>
+                            </h:panelGroup>
 
                             <h:outputText value=" " />
                             <p:wizard widgetVar="wiz" flowListener="#{mB_TablaControl.wizardRDFflow}" showNavBar="false">
@@ -379,7 +526,7 @@
                                     <h:outputText value="#{mB_TablaControl.registroSeleccionado.operacionA}" /><br/><br/>
                                     
                                     <p:panel id="DotA" header="Dot representation" toggleable="true" toggleSpeed="500" closeSpeed="500" style="margin-bottom:20px" collapsed="true">
-                                        <p:inputTextarea rows="10" cols="67" value="#{mB_TablaControl.registroSeleccionado.linkGoogleChartOperacionA}" autoResize="false"/>
+                                        <p:inputTextarea rows="10" cols="67" value="#{mB_TablaControl.registroSeleccionado.ADotString}" autoResize="false"/>
                                     </p:panel>
                                 </p:layoutUnit>
 
@@ -396,7 +543,7 @@
                                     <h:outputText value="#{mB_TablaControl.registroSeleccionado.operacionB}" /><br/><br/>
                                     
                                     <p:panel id="DotB" header="Dot representation" toggleable="true" toggleSpeed="500" closeSpeed="500" style="margin-bottom:20px" collapsed="true">
-                                        <p:inputTextarea rows="10" cols="67" value="#{mB_TablaControl.registroSeleccionado.linkGoogleChartOperacionB}" autoResize="false"/>
+                                        <p:inputTextarea rows="10" cols="67" value="#{mB_TablaControl.registroSeleccionado.BDotString}" autoResize="false"/>
                                     </p:panel>
                                 </p:layoutUnit>
 

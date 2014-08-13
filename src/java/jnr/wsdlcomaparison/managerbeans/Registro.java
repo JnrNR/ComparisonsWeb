@@ -97,6 +97,13 @@ public class Registro {
         this.id = id;
     }
     
+    public String getADotString(){
+        return linkGoogleChartOperacionA.substring(46);
+    }
+    
+    public String getBDotString(){
+        return linkGoogleChartOperacionB.substring(46);
+    }
     
     
     
